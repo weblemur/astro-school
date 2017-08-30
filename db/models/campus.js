@@ -8,7 +8,6 @@ module.exports = db.define('campus', {
     allowNull: false
   },
   imageUrl: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   }
 });
