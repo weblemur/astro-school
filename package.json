@@ -4,6 +4,7 @@
   "description": "A practice JS-stack app",
   "main": "index.js",
   "scripts": {
+    "seed": "node seed",
     "build": "webpack",
     "build-watch": "webpack -w",
     "start": "nodemon server/start.js"
