@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+const { expect } = require('chai').use(require('chai-things'));
 const agent = require('supertest').agent(require('../server/start'));
 const { db, Campus, Student } = require('../db');
 
@@ -222,6 +222,36 @@ describe('Student API routes', () => {
     it('404s for non-existent student', () => {
       return agent.delete('/api/students/4')
         .expect(404);
+    });
+  });
+});
+
+
+/*** Association API Tests ***/
+
+
+describe('Association API routes', () => {
+  describe('GET /api/campus/:id/students', () => {
+    it('sends a list students in that campus', () => {
+      return agent.get('/api/campuses/2/students')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.length).to.equal(2);
+          expect(res.body).to.contain.a.thing.with.property('name', 'Walter');
+          expect(res.body).to.contain.a.thing.with.property('name', 'Jenna');
+        });
+    });
+  });
+
+  describe('GET /api/students/:id/campus', () => {
+    it('sends a student\'s campus', () => {
+      return agent.get('/api/students/1/campus')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.name).to.equal('First Campus');
+        });
     });
   });
 });

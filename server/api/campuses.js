@@ -48,4 +48,6 @@ campusApi.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
+campusApi.use('/:id/students', require('./students'));
+
 module.exports = campusApi;
