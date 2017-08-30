@@ -22,7 +22,9 @@ beforeEach(() => {
 
 after(() => db.close());
 
-/*** Tests ***/
+
+/*** Campus API Tests ***/
+
 
 describe('Campus API routes', () => {
   describe('GET /api/campuses', () => {
@@ -122,6 +124,10 @@ describe('Campus API routes', () => {
   });
 });
 
+
+/*** Student API Tests ***/
+
+
 describe('Student API routes', () => {
   describe('GET /api/students', () => {
     it('sends a list of all students', () => {
@@ -131,6 +137,91 @@ describe('Student API routes', () => {
         .then(res => {
           expect(res.body.length).to.equal(3);
         });
+    });
+  });
+
+  describe('GET /api/students/:id', () => {
+    it('sends info for a specific student', () => {
+      return agent.get('/api/students/1')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.id).to.equal(1);
+        });
+    });
+    it('404s for non-existent student', () => {
+      return agent.get('/api/students/4')
+        .expect(404);
+    });
+  });
+
+  describe('POST /api/students/', () => {
+    it('creates a new student', () => {
+      return agent.post('/api/students/')
+        .send({ name: 'New Student', email: 'email@mail.com', campusId: 1 })
+        .expect(201)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.id).to.be.a('number');
+          expect(res.body.name).to.equal('New Student');
+        })
+        .then(() => Student.findAll())
+        .then(students => {
+          expect(students.length).to.equal(4);
+        });
+    });
+    it('500s for an invalid student', () => {
+      return agent.post('/api/students/')
+        .send({})
+        .expect(500)
+        .then(() => Student.findAll())
+        .then(students => {
+          expect(students.length).to.equal(3);
+        });
+    });
+  });
+
+  describe('PUT /api/students/:id', () => {
+    it('updates a specific student', () => {
+      return agent.put('/api/students/1')
+        .send({name: 'Updated Student'})
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.name).to.equal('Updated Student');
+        })
+        .then(() => Student.findById(1))
+        .then(student => {
+          expect(student.name).to.equal('Updated Student');
+        });
+    });
+    it('404s for non-existent student', () => {
+      return agent.put('/api/students/4')
+        .expect(404);
+    });
+    it('500s for invalid updates', () => {
+      return agent.put('/api/students/1')
+        .send({name: null})
+        .expect(500)
+        .then(() => Student.findById(1))
+        .then(student => {
+          expect(student.name).to.equal('Douglas');
+        });
+    });
+  });
+
+  describe('DELETE /api/students/:id', () => {
+    it('deletes a specific student', () => {
+      return agent.delete('/api/students/1')
+        .expect(204)
+        .then(() => Student.findById(1))
+        .then(student => {
+          expect(student).to.equal(null);
+        });
+    });
+    it('404s for non-existent student', () => {
+      return agent.delete('/api/students/4')
+        .expect(404);
     });
   });
 });
