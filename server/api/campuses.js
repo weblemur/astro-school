@@ -48,6 +48,8 @@ campusApi.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
+// All restful routes in /server/api/students.js
+// are mounted here on each individual campus route
 campusApi.use('/:id/students', require('./students'));
 
 module.exports = campusApi;

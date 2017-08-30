@@ -1,9 +1,10 @@
 const studentApi = require('express').Router();
 const { Student, Campus } = require('../../db/models');
 
+
 studentApi.use((req, res, next) => {
   req.query = {};
-  if (req.campus) {
+  if (req.campus) { // If mounted on /api/campuses/:id/...
     req.query.campusId = req.campus.id;
   }
   next();
@@ -63,7 +64,7 @@ studentApi.delete('/:id', (req, res, next) => {
 
 studentApi.get('/:id/campus', (req, res, next) => {
   res.status(200);
-  if (req.campus) {
+  if (req.campus) { // if someone really wants to query api/campus/:id/student/:id/campus
     res.json(req.campus);
   } else {
     Campus.findById(req.student.campusId)
