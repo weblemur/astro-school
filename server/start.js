@@ -21,7 +21,14 @@ module.exports = app
   .use(bodyParser.json())
   .use(express.static(resolve(__dirname, '..', 'public'))) // Serve static files from ../public
   .use('/api', require('./api')) // Serve our api
-  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html'))); // Send index.html for any other requests.
+  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html'))) // Send index.html for any other requests.
+  .use(function (err, req, res, next) {
+    if (process.env.NODE_ENV !== 'test') {
+      console.error(err, typeof next);
+      console.error(err.stack);
+    }
+    res.status(err.status || 500).send(err.message || 'Internal server error.');
+  });
 
   // notice the use of `_` as the first parameter above. This is a pattern for parameters that must exist, but you don't use or reference (or need) in the function body that follows.
 

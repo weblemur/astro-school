@@ -7,7 +7,7 @@
     "seed": "node seed",
     "build": "webpack",
     "build-watch": "webpack -w",
-    "test": "DATABASE_NAME=edu-schedu-test ./node_modules/.bin/mocha ./specs/*.spec.js --watch",
+    "test": "NODE_ENV=test DATABASE_NAME=edu-schedu-test ./node_modules/.bin/mocha ./specs/*.spec.js --watch",
     "start": "nodemon server/start.js"
   },
   "keywords": [
