@@ -41,6 +41,7 @@
     "mocha": "^3.5.0",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
+    "supertest": "^3.0.0",
     "webpack": "^3.5.5"
   }
 }

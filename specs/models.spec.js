@@ -1,10 +1,9 @@
 const { expect } = require('chai').use(require('chai-things'));
-const { db, Campus, Student } = require('../db');
+const { Campus, Student } = require('../db');
 
-before(() => db.sync({force: true}) );
+// before(() => db.sync({force: true}) );
 
-// erase all tasks after each spec
-afterEach(() => db.sync({force: true}) );
+// afterEach(() => db.sync({force: true}) );
 
 describe('Campus Model', () => {
   let campus;
