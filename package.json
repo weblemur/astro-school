@@ -42,9 +42,11 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.1",
     "chai-things": "^0.2.0",
+    "enzyme": "^2.9.1",
     "mocha": "^3.5.0",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
+    "react-test-renderer": "^15.6.1",
     "supertest": "^3.0.0",
     "webpack": "^3.5.5"
   }
