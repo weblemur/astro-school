@@ -8,9 +8,12 @@ export default function StudentCard (props) {
     <li>
       <h2>{name}</h2>
       <p>{email}</p>
-      <select value={campusId}>
-        { campuses.map(campus => <option value={campus.id}>{campus.name}</option>) }
-      </select>
+      { campuses ?
+        <select value={campusId}>
+          { campuses.map(campus => <option value={campus.id}>{campus.name}</option>) }
+        </select>
+        : null
+      }
     </li>
   );
 }

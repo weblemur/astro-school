@@ -7,7 +7,9 @@ const Students = (props) => {
   return (
     <div>
       <h1>Students</h1>
-      { students.map(student => <StudentCard key={student.id} student={student} campuses={props.campuses} />) }
+      <ul>
+        { students.map(student => <StudentCard key={student.id} student={student} campuses={props.campuses} />) }
+      </ul>
     </div>
   );
 };
