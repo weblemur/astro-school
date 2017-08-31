@@ -25,11 +25,19 @@ describe('View Specs ––', () => {
   });
 
   describe('<Campuses /> Component', () => {
-    const campuses = [{ id: 1, name: 'campus1' }, { id: 2, name: 'campus2' }];
+    const store = {
+      getState: () => ({ campuses: [{ id: 1, name: 'campus1' }, { id: 2, name: 'campus2' }] })
+    };
     let campus;
-    beforeEach(() => campus = shallow(<Campuses campuses={campuses} />));
+    beforeEach(() => campus = shallow(<Campuses store={store} />));
 
-    it('renders a <CampusCard /> for each campus');
-    it('passes unique info to every <CampusCard />');
+    it('renders a <CampusCard /> for each campus', () => {
+      expect(campus.find(CampusCard).length).to.equal(2);
+    });
+    it('passes unique info to every <CampusCard />', () => {
+      let campuses = campus.find(CampusCard);
+      expect(campuses[0].props().campus).to.have.property('id', 1);
+      expect(campuses[0].props().campus).to.have.property('id', 2);
+    });
   });
 });
