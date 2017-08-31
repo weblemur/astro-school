@@ -2,6 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import chaiThings from 'chai-things';
 import { shallow } from 'enzyme';
+import configureStore from 'redux-mock-store';
 
 import Campuses from '../app/components/Campuses';
 import CampusCard from '../app/components/CampusCard';
@@ -9,6 +10,7 @@ import CampusCard from '../app/components/CampusCard';
 const expect = chai.use(chaiThings).expect;
 
 describe('View Specs ––', () => {
+  const mockStore = configureStore();
 
   describe('<CampusCard /> Component', () => {
     const campus = { id: 1, name: 'campus1', imageUrl: '/test.jpg' };
@@ -25,19 +27,19 @@ describe('View Specs ––', () => {
   });
 
   describe('<Campuses /> Component', () => {
-    const store = {
-      getState: () => ({ campuses: [{ id: 1, name: 'campus1' }, { id: 2, name: 'campus2' }] })
-    };
+    const campuses = [{ id: 1, name: 'campus1' }, { id: 2, name: 'campus2' }];
     let campus;
-    beforeEach(() => campus = shallow(<Campuses store={store} />));
+    let mock = mockStore({ campuses });
+    // console.log(mock.getState());
+    beforeEach(() => campus = shallow(<Campuses store={mock} />));
 
     it('renders a <CampusCard /> for each campus', () => {
-      expect(campus.find(CampusCard).length).to.equal(2);
+      expect(campus.dive().find(CampusCard).length).to.equal(2);
     });
     it('passes unique info to every <CampusCard />', () => {
-      let campuses = campus.find(CampusCard);
-      expect(campuses[0].props().campus).to.have.property('id', 1);
-      expect(campuses[0].props().campus).to.have.property('id', 2);
+      let campusCards = campus.dive().find(CampusCard);
+      expect(campusCards.get(0).props.campus).to.have.property('id', 1);
+      expect(campusCards.get(1).props.campus).to.have.property('id', 2);
     });
   });
 });

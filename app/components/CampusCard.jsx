@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Campuses (props) {
+export default function CampusCard (props) {
   const { id, name, imageUrl } = props.campus;
   return (
     <div>
