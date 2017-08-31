@@ -104,18 +104,18 @@ describe('Reducer Specs ––', () => {
         store.dispatch(initStudents([{ id: 1 }, { id: 2 }]));
         expect(store.getState().length).to.equal(2);
       });
-      it('can add a campus', () => {
+      it('can add a student', () => {
         store.dispatch(addStudent({ id: 1 }));
         store.dispatch(addStudent({ id: 2 }));
         expect(store.getState().length).to.equal(2);
       });
-      it('can remove a campus', () => {
+      it('can remove a student', () => {
         store.dispatch(initStudents([{ id: 1 }, { id: 2 }]));
         store.dispatch(removeStudent({ id: 1 }));
         expect(store.getState().length).to.equal(1);
         expect(store.getState()[0]).to.have.property('id', 2);
       });
-      it('can edit a campus', () => {
+      it('can edit a student', () => {
         store.dispatch(initStudents([{ id: 1 }, { id: 2 }]));
         store.dispatch(editStudent({ id: 2, name: 'updated' }));
         expect(store.getState()[1]).to.have.property('name', 'updated');
@@ -131,7 +131,7 @@ describe('Reducer Specs ––', () => {
             expect(store.getState().length).to.equal(2);
           });
       });
-      it('can create a campus', () => {
+      it('can create a student', () => {
         store.dispatch(initStudents([{ id: 1 }, { id: 2 }]));
         mock.onPost('/api/students').reply(config =>
           [201, Object.assign({ id: 3 }, JSON.parse(config.data))]);
@@ -141,7 +141,7 @@ describe('Reducer Specs ––', () => {
             expect(store.getState()[2]).to.have.property('name', 'New Student');
           });
       });
-      it('can delete a campus', () => {
+      it('can delete a student', () => {
         store.dispatch(initStudents([{ id: 1 }, { id: 2 }]));
         mock.onDelete('/api/students/1').reply(204);
         return store.dispatch(deleteStudent({ id: 1 }))
@@ -150,7 +150,7 @@ describe('Reducer Specs ––', () => {
             expect(store.getState()[0]).to.have.property('id', 2);
           });
       });
-      it('can update a campus', () => {
+      it('can update a student', () => {
         store.dispatch(initStudents([{ id: 1 }, { id: 2, name: 'init' }]));
         mock.onPut('/api/students/2').reply(config =>
           [201, Object.assign({ id: 2, name: 'init' }, JSON.parse(config.data))]);
