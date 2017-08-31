@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Root from './Root';
 import Home from './Home';
 import Campuses from './Campuses';
 import Students from './Students';
 import NotFound from './NotFound';
+import { fetchCampuses } from '../reducers/campuses';
+import { fetchStudents } from '../reducers/students';
 
-export default class RoutesWrapper extends Component {
-  render() {
+class BaseRoutes extends Component {
+  componentDidMount () {
+    this.props.loadState();
+  }
+
+  render () {
     return (
       <Router>
         <Root>
@@ -22,3 +29,13 @@ export default class RoutesWrapper extends Component {
     );
   }
 }
+
+const mapState = null;
+const mapDispatch = dispatch => ({
+  loadState: () => {
+    dispatch(fetchCampuses());
+    dispatch(fetchStudents());
+  }
+});
+
+export default connect(mapState, mapDispatch)(BaseRoutes);
