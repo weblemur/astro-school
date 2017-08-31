@@ -1,15 +1,21 @@
-const { expect } = require('chai').use(require('chai-things'));
-const { createStore, applyMiddleware } = require('redux');
-const reducers = require('../app/reducers');
-const thunkMiddleware = require('redux-thunk');
-let store = {};
+import chai from 'chai';
+import chaiThings from 'chai-things';
+import { createStore, applyMiddleware } from 'redux';
+import campusReducer from '../app/reducers/campuses';
+import thunkMiddleware from 'redux-thunk';
 
+const expect = chai.use(chaiThings).expect;
 describe('Reducer Specs ––', () => {
-  beforeEach(() => store = createStore(reducers, applyMiddleware(thunkMiddleware)));
+  let store;
 
   describe('Campus Store', () => {
-    let state;
-    it('is an array');
+    beforeEach(() => {
+      store = createStore(campusReducer, applyMiddleware(thunkMiddleware));
+      store = createStore(campusReducer);
+    });
+    it('is an array', () => {
+      expect(store.getState()).to.be.an('array');
+    });
     describe('actions:', () => {
       it('can initialize the whole array');
       it('can add a campus');
