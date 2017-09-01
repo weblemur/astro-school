@@ -6,7 +6,9 @@ export default function StudentCard (props) {
   const campuses = props.campuses;
   return (
     <li className="student_info">
-      <h2 className="student_name">{name}</h2>
+      <Link to={`/students/${id}`}>
+        <h2 className="student_name">{name}</h2>
+      </Link>
       <p className="student_email">{email}</p>
       { campuses ?
         <div className="student_campus">
