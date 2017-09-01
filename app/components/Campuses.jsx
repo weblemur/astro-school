@@ -11,7 +11,9 @@ const Campuses = (props) => {
         <h1 className="page_title">Campuses</h1>
         <Link to="/campuses/new" className="btn add_btn add_campus_button">Add a new Campus</Link>
       </header>
-      { campuses.map(campus => <CampusCard key={campus.id} campus={campus} />) }
+      <div className="campus_list">
+        { campuses.map(campus => <CampusCard key={campus.id} campus={campus} />) }
+      </div>
     </div>
   );
 };

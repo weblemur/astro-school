@@ -19,6 +19,12 @@ body {
   text-align: center;
 }
 
+#content {
+  position: relative;
+  max-width: 860px;
+  margin: auto;
+}
+
 .btn {
   display: block;
   height: 48px;
@@ -26,6 +32,7 @@ body {
   border-radius: 8px;
   padding: 0 12px;
   line-height: 48px;
+  font-size: 18px;
   color: #aee;
   background: #334892;
   text-decoration: none;
@@ -65,18 +72,22 @@ body {
   position: relative;
 }
 
-.page_header .add_btn {
+.page_header .btn {
   position: absolute;
-  top: 50%;
-  right: 96px;
-  margin-top: -24px;
+  right: 0;
+  top: 0;
+}
+
+.campus_list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .campus_preview {
   background: #000;
   padding: 24px;
-  margin: 0 12px 24px 12px;
-  display: inline-block;
+  margin-bottom: 24px;
 }
 
 .campus_preview .planet_name {
@@ -85,8 +96,8 @@ body {
 }
 
 .planet {
-  width: 400px;
-  height: 400px;
+  width: 340px;
+  height: 340px;
   margin: auto;
   overflow: hidden;
 }
@@ -95,7 +106,7 @@ body {
   max-height: 100%;
 }
 
-.students_list, .campus_list {
+.students_list {
   max-width: 680px;
   margin: auto;
   list-style: none;
@@ -127,8 +138,20 @@ body {
 }
 
 .campus_full {
+  display: flex;
   margin-bottom: 36px;
 }
+
+.campus_full .planet {
+  position: fixed;
+  left: 50%;
+  margin-left: -340px;
+}
+
+.campus_full .student_list {
+  position: fixed;
+}
+
 
 .new_entry_form {
   display: flex;
