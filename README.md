@@ -1,6 +1,5 @@
-# Edu-Schedu
+# Astro-School
 
-> _eh-djoo skeh-djoo_
+The goal: A basic restful application utilizing React, Redux, Express, and Sequelize
 
-Senior enrichment project for Fullstack Academy!
-
+The guidlines: Provided by Fullstack Academy

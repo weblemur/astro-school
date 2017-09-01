@@ -1,5 +1,5 @@
 {
-  "name": "edu-schedu",
+  "name": "astro-school",
   "version": "0.0.1",
   "description": "A practice JS-stack app",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "seed": "node seed",
     "build": "webpack",
     "build-watch": "webpack -w",
-    "test": "NODE_ENV=test DATABASE_NAME=edu-schedu-test ./node_modules/.bin/mocha --compilers jsx:babel-register",
+    "test": "NODE_ENV=test DATABASE_NAME=astro-school-test ./node_modules/.bin/mocha --compilers jsx:babel-register",
     "test-watch": "npm test -- ./specs/*.spec.js --watch",
     "start": "nodemon server/start.js"
   },
