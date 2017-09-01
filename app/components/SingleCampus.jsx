@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import StudentCard from './StudentCard';
 import CampusForm from './CampusForm';
 import { setCampus } from '../reducers/currentCampus';
+import { updateCampus } from '../reducers/campuses';
 
 class SingleCampus extends Component {
   constructor (props) {
@@ -48,6 +49,7 @@ class SingleCampus extends Component {
 
   discardEdits () {
     this.setState({ editing: false });
+    this.setCurrentCampus(this.props.campuses);
   }
 
   startEditing () {
@@ -56,6 +58,12 @@ class SingleCampus extends Component {
 
   handleSubmit (evt) {
     evt.preventDefault();
+    this.setState({ editing: false });
+    this.props.submitEdits({
+      id: Number(this.props.match.params.id),
+      name: evt.target.name.value,
+      imageUrl: evt.target.image.value
+    });
   }
 
   render () {
@@ -89,7 +97,8 @@ class SingleCampus extends Component {
 
 const mapState = ({ campuses, students, currentCampus }) => ({ campuses, students, currentCampus });
 const mapDispatch = (dispatch) => ({
-  initCampus: campus => dispatch(setCampus(campus))
+  initCampus: campus => dispatch(setCampus(campus)),
+  submitEdits: campus => dispatch(updateCampus(campus))
 });
 
 export default connect(mapState, mapDispatch)(SingleCampus);
