@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { writeCampusName, writeCampusImageUrl } from '../reducers/newCampusEntry';
+import { writeCampusName, writeCampusImageUrl } from '../reducers/currentCampus';
 
 const CampusForm = (props) => {
   const { changeName, changeUrl, handleSubmit } = props;
-  const newCampusEntry = props.newCampusEntry || {};
+  const currentCampus = props.currentCampus || {};
 
   return (
     <form className="new_entry_form new_campus_form" onSubmit={handleSubmit}>
@@ -15,7 +15,7 @@ const CampusForm = (props) => {
           id="campus_name_input"
           name="name"
           type="text"
-          value={newCampusEntry.name}
+          value={currentCampus.name}
           onChange={changeName} />
       </div>
       <div className="form_group">
@@ -24,7 +24,7 @@ const CampusForm = (props) => {
           id="campus_image_input"
           name="image"
           type="text"
-          value={newCampusEntry.imageUrl}
+          value={currentCampus.imageUrl}
           onChange={changeUrl} />
       </div>
       <input className="btn btn_submit" type="submit" value="Create" />
@@ -32,7 +32,7 @@ const CampusForm = (props) => {
   );
 };
 
-const mapState = ({ newCampusEntry }) => ({ newCampusEntry });
+const mapState = ({ currentCampus }) => ({ currentCampus });
 const mapDispatch = dispatch => ({
   changeName: (evt) => {
     evt.preventDefault();

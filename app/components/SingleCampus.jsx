@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StudentCard from './StudentCard';
+import CampusForm from './CampusForm';
+import { setCampus } from '../reducers/currentCampus';
 
 class SingleCampus extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentCampus: {},
-      currentStudents: []
+      currentStudents: [],
+      editing: false
     };
+
+    this.startEditing = this.startEditing.bind(this);
+    this.discardEdits = this.discardEdits.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount () {
@@ -17,7 +23,7 @@ class SingleCampus extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.campuses && newProps.campuses.length > 0) {
+    if (!this.props.currentCampus.name && newProps.campuses && newProps.campuses.length > 0) {
       this.setCurrentCampus(newProps.campuses);
     }
 
@@ -29,7 +35,7 @@ class SingleCampus extends Component {
   setCurrentCampus (campuses) {
     const newCampus = campuses.find(campus => campus.id === Number(this.props.match.params.id));
     if (newCampus) {
-      this.setState({ currentCampus: newCampus });
+      this.props.initCampus(newCampus);
     }
   }
 
@@ -40,15 +46,34 @@ class SingleCampus extends Component {
     }
   }
 
+  discardEdits () {
+    this.setState({ editing: false });
+  }
+
+  startEditing () {
+    this.setState({ editing: true });
+  }
+
+  handleSubmit (evt) {
+    evt.preventDefault();
+  }
+
   render () {
-    const { currentCampus, currentStudents } = this.state;
-    const { campuses } = this.props;
+    const { currentStudents, editing } = this.state;
+    const { currentCampus, campuses } = this.props;
     return (
       <div id="content">
         <header className="page_header">
           <h1 className="page_title">{currentCampus.name}</h1>
-          <button className="btn edit_btn add_campus_button">Edit Campus</button>
+            <div className="page_controls">
+              <button
+                className="btn edit_btn edit_campus_button"
+                onClick={ editing ? this.discardEdits : this.startEditing }>
+                  { editing ? 'Discard Edits' : 'Edit Campus' }
+                </button>
+            </div>
         </header>
+        { editing && <CampusForm handleSubmit={this.handleSubmit}  /> }
         <div className="campus_full">
           <div className="planet">
             <img src={currentCampus.imageUrl} alt={`${currentCampus.name} image`} />
@@ -62,6 +87,9 @@ class SingleCampus extends Component {
   }
 }
 
-const mapState = ({ campuses, students }) => ({ campuses, students });
+const mapState = ({ campuses, students, currentCampus }) => ({ campuses, students, currentCampus });
+const mapDispatch = (dispatch) => ({
+  initCampus: campus => dispatch(setCampus(campus))
+});
 
-export default connect(mapState)(SingleCampus);
+export default connect(mapState, mapDispatch)(SingleCampus);

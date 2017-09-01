@@ -9,7 +9,9 @@ const Campuses = (props) => {
     <div id="content">
       <header className="page_header">
         <h1 className="page_title">Campuses</h1>
-        <Link to="/campuses/new" className="btn add_btn add_campus_button">Add a new Campus</Link>
+        <div className="page_controls">
+          <Link to="/campuses/new" className="btn add_btn add_campus_button">Add a new Campus</Link>
+        </div>
       </header>
       <div className="campus_list">
         { campuses.map(campus => <CampusCard key={campus.id} campus={campus} />) }
