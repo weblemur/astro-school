@@ -108,7 +108,7 @@ body {
 
 .students_list {
   max-width: 680px;
-  margin: auto;
+  margin: 0 auto;
   list-style: none;
 }
 
@@ -139,19 +139,17 @@ body {
 
 .campus_full {
   display: flex;
+  align-items: flex-start;
   margin-bottom: 36px;
 }
 
 .campus_full .planet {
-  position: fixed;
-  left: 50%;
-  margin-left: -340px;
+  min-width: 340px;
 }
 
-.campus_full .student_list {
-  position: fixed;
-}
+.campus_full .students_list {
 
+}
 
 .new_entry_form {
   display: flex;

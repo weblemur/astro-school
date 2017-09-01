@@ -39,7 +39,7 @@ class SingleCampus extends Component {
           <div className="planet">
             <img src={currentCampus.imageUrl} alt={`${currentCampus.name} image`} />
           </div>
-          <ul className="campus_list">
+          <ul className="students_list">
             { currentStudents.map(student => <StudentCard key={student.id} student={student} campuses={campuses} />)}
           </ul>
         </div>
