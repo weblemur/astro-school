@@ -5,30 +5,44 @@ import StudentCard from './StudentCard';
 class SingleCampus extends Component {
   constructor (props) {
     super(props);
-    console.log(props);
     this.state = {
-      id: Number(props.match.params.id),
-      campuses: [],
       currentCampus: {},
-      students: [],
       currentStudents: []
     };
   }
 
+  componentDidMount () {
+    this.setCurrentCampus(this.props.campuses);
+    this.setCurrentStudents(this.props.students);
+  }
+
   componentWillReceiveProps (newProps) {
     if (newProps.campuses && newProps.campuses.length > 0) {
-      const currentCampus = newProps.campuses.find(campus => campus.id === this.state.id) || {};
-      this.setState({ campuses: newProps.campuses, currentCampus });
+      this.setCurrentCampus(newProps.campuses);
     }
 
     if (newProps.students && newProps.students.length > 0) {
-      const currentStudents = newProps.students.filter(student => student.campusId === this.state.id) || [];
-      this.setState({ students: newProps.students, currentStudents });
+      this.setCurrentStudents(newProps.students);
+    }
+  }
+
+  setCurrentCampus (campuses) {
+    const newCampus = campuses.find(campus => campus.id === Number(this.props.match.params.id));
+    if (newCampus) {
+      this.setState({ currentCampus: newCampus });
+    }
+  }
+
+  setCurrentStudents (students) {
+    const newStudents = students.filter(student => student.campusId === Number(this.props.match.params.id));
+    if (newStudents.length > 0) {
+      this.setState({ currentStudents: newStudents });
     }
   }
 
   render () {
-    const { currentCampus, currentStudents, campuses } = this.state;
+    const { currentCampus, currentStudents } = this.state;
+    const { campuses } = this.props;
     return (
       <div id="content">
         <header className="page_header">
