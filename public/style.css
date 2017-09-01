@@ -19,6 +19,18 @@ body {
   text-align: center;
 }
 
+.btn {
+  display: block;
+  height: 48px;
+  border: 1px solid #899;
+  border-radius: 8px;
+  padding: 0 12px;
+  line-height: 48px;
+  color: #aee;
+  background: #334892;
+  text-decoration: none;
+}
+
 .nav_bar {
   display: flex;
   justify-content: center;
@@ -47,6 +59,17 @@ body {
   margin-bottom: 24px;
   font-size: 34px;
   line-height: 48px;
+}
+
+.page_header {
+  position: relative;
+}
+
+.page_header .add_btn {
+  position: absolute;
+  top: 50%;
+  right: 96px;
+  margin-top: -24px;
 }
 
 .campus_preview {
@@ -105,4 +128,41 @@ body {
 
 .campus_full {
   margin-bottom: 36px;
+}
+
+.new_entry_form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 680px;
+  margin: auto;
+}
+
+.new_entry_form .form_group {
+  min-width: 50%;
+  padding: 24px;
+}
+
+.new_entry_form input, .new_entry_form label {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  font-size: 18px;
+}
+
+.new_entry_form label {
+  font-size: 22px;
+}
+
+.new_entry_form input {
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 18px;
+}
+
+.new_entry_form .btn_submit {
+  width: 100%;
+  max-width: 160px;
+  margin: auto;
+  padding: 0;
 }

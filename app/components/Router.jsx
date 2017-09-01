@@ -7,6 +7,7 @@ import Campuses from './Campuses';
 import Students from './Students';
 import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
+import NewCampus from './NewCampus';
 import NotFound from './NotFound';
 import { fetchCampuses } from '../reducers/campuses';
 import { fetchStudents } from '../reducers/students';
@@ -23,6 +24,7 @@ class BaseRoutes extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/campuses" component={Campuses} />
+            <Route exact path="/campuses/new" component={NewCampus} />
             <Route path="/campuses/:id" component={SingleCampus} />
             <Route exact path="/students" component={Students} />
             <Route path="/students/:id" component={SingleStudent} />
