@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default function NotFound () {
   return (
-    <div>
-      <h1>404 – not found</h1>
+    <div id="content">
+      <h1 className="page_title">404 – not found</h1>
       <Link to="/">return home</Link>
     </div>
   );

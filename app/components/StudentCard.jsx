@@ -5,13 +5,16 @@ export default function StudentCard (props) {
   const { id, name, email, campusId } = props.student;
   const campuses = props.campuses;
   return (
-    <li>
-      <h2>{name}</h2>
-      <p>{email}</p>
+    <li className="student_info">
+      <h2 className="student_name">{name}</h2>
+      <p className="student_email">{email}</p>
       { campuses ?
-        <select value={campusId}>
-          { campuses.map(campus => <option value={campus.id}>{campus.name}</option>) }
-        </select>
+        <div className="student_campus">
+          <label htmlFor={`${name}_campus`}>Campus:</label>
+          <select id={`${name}_campus`} className="student_campus_select" value={campusId}>
+            { campuses.map(campus => <option value={campus.id}>{campus.name}</option>) }
+          </select>
+        </div>
         : null
       }
     </li>

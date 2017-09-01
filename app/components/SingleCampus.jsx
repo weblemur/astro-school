@@ -7,10 +7,14 @@ const SingleCampus = (props) => {
   const { name, imageUrl } = campus;
 
   return (
-    <div>
-      <h2>{name}</h2>
-      <img src={imageUrl} alt={`${name} image`} />
-      { students.map(student => <StudentCard key={student.id} student={student} campuses={props.campuses} />)}
+    <div id="content">
+      <h1 className="page_title">{name}</h1>
+      <div className="campus_full planet">
+        <img src={imageUrl} alt={`${name} image`} />
+      </div>
+      <ul className="campus_list">
+        { students.map(student => <StudentCard key={student.id} student={student} campuses={props.campuses} />)}
+      </ul>
     </div>
   );
 };
