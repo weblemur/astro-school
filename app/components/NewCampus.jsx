@@ -1,12 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 import { writeCampusName, writeCampusImageUrl } from '../reducers/newCampusEntry';
 import { createCampus } from '../reducers/campuses';
 // import CampusCard from './CampusCard'; // NEEDS OPTIONAL LINK WRAPPING
 
 const NewCampus = (props) => {
-  const { changeName, changeUrl, handleSubmit } = props;
+  const { changeName, changeUrl, submitCampus } = props;
   const { name, imageUrl } = props.newCampusEntry;
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    submitCampus({ name: evt.target.name.value, imageUrl: evt.target.image.value })
+      .then(props.history.push('/campuses'));
+  };
 
   return (
     <div id="content">
@@ -39,17 +45,18 @@ const NewCampus = (props) => {
 const mapState = ({ newCampusEntry }) => ({ newCampusEntry });
 const mapDispatch = dispatch => ({
   changeName: (evt) => {
+    evt.preventDefault();
     dispatch(writeCampusName(evt.target.value));
   },
   changeUrl: (evt) => {
+    evt.preventDefault();
     dispatch(writeCampusImageUrl(evt.target.value));
   },
-  handleSubmit: (evt) => {
+  submitCampus: (campus) => {
     dispatch(writeCampusName(''));
     dispatch(writeCampusImageUrl(''));
-    return dispatch(createCampus({ name: evt.target.name.value, imageUrl: evt.target.image.value }))
-      .then();
+    return dispatch(createCampus(campus));
   }
 });
 
-export default connect(mapState, mapDispatch)(NewCampus);
+export default withRouter(connect(mapState, mapDispatch)(NewCampus));

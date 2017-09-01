@@ -10,7 +10,7 @@ export const writeCampusImageUrl = imageUrl => ({ type: WRITE_CAMPUS_IMAGE_URL, 
 
 /***     REDUCER      ***/
 
-export default (state = {}, action) => {
+export default (state = { name: '', imageUrl: ''}, action) => {
   switch (action.type) {
     case WRITE_CAMPUS_NAME:
       return Object.assign({}, state, { name: action.name });
