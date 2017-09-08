@@ -1,3 +1,5 @@
+// aww hell yeah
+// tests!
 const { expect } = require('chai').use(require('chai-things'));
 const agent = require('supertest').agent(require('../server/start'));
 const { db, Campus, Student } = require('../db');
