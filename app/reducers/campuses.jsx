@@ -1,5 +1,17 @@
 import axios from 'axios';
 
+// I wonder if the names of the action creators and thunk creators
+// could be more intention revealing.
+//
+// addCampus vs createAddCampusAction
+//
+// fetchCampus vs createFetchCampusThunk
+//
+// Perhaps those are more verbose for your taste,
+// but from reading the names alone, it is difficult to
+// descern whether `editCampus` or `updateCampus` is the name
+// of an action creator or a thunk creator.
+
 /***     ACTIONS      ***/
 
 const INIT_CAMPUSES = 'INIT_CAMPUSES';
@@ -42,6 +54,7 @@ export const updateCampus = campus => dispatch => {
 
 /***     REDUCER      ***/
 
+// Nice and terse +1
 export default (state = [], action) => {
   switch (action.type) {
     case INIT_CAMPUSES:
